@@ -12,3 +12,4 @@ websockets
 gunicorn
 Click
 h11
+scikit-learn
