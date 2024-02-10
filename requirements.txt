@@ -2,10 +2,6 @@ python-multipart
 pydantic 
 pandas 
 numpy
-streamlit
-streamlit_option_menu
-seaborn
-matplotlib
 openpyxl
 uvicorn[standard]
 fastapi

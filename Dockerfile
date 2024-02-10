@@ -7,7 +7,6 @@ RUN apt-get update
 RUN apt-get install nano unzip
 RUN apt install curl -y
 
-RUN curl -fsSL https://get.deta.dev/cli.sh | sh
 
 # Copy requirements file and install dependencies
 COPY requirements.txt /app/requirements.txt
