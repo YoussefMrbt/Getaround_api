@@ -6,7 +6,21 @@ from fastapi import FastAPI, HTTPException, Request
 import socket
 import sys
 
-app = FastAPI()
+description = """
+Welcome to the Vehicle Price Prediction API. This app is made for you to understand how FastAPI works! Try it out 🕹️
+
+## Introduction Endpoints
+
+Here are two endpoints you can try:
+* `/`: **GET** request that display a simple default message.
+* `/predict`: **POST** request that accepts a JSON payload with the features to predict the price of a vehicle.
+"""
+
+# Create a FastAPI app
+app = FastAPI(
+    title="🪐 Vehicle Price Prediction API",
+    description=description
+)
 
 hostname = socket.gethostname()
 
@@ -71,6 +85,4 @@ async def predict(request: Request):
 
 
 if __name__ == '__main__':
-    import uvicorn
-    # Use the PORT environment variable if available, otherwise default to 8502
     uvicorn.run(app, host="0.0.0.0", port=5000)
