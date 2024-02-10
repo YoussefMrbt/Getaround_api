@@ -3,13 +3,23 @@ import random
 import uvicorn
 import pickle
 from fastapi import FastAPI, HTTPException, Request
+import socket
+import sys
 
 app = FastAPI()
 
+hostname = socket.gethostname()
+
+version = f"{sys.version_info.major}.{sys.version_info.minor}"
+
 # Define the home page
-@app.get('/')
-def hello():
-    return 'Hello, World!'
+@app.get("/")
+async def read_root():
+    return {
+        "name": "my-app",
+        "host": hostname,
+        "version": f"Hello world! From FastAPI running on Uvicorn. Using Python {version}"
+    }
 
 
 # Load default model pickle
