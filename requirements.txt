@@ -7,7 +7,8 @@ streamlit_option_menu
 seaborn
 matplotlib
 openpyxl
-uvicorn
+uvicorn[standard]
 fastapi
 Scikit-learn
 mlflow
+flask

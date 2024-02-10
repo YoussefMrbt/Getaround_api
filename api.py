@@ -1,14 +1,13 @@
-from flask import Flask, request, jsonify
 import pandas as pd
 import random
 import uvicorn
 import pickle
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
 
 app = FastAPI()
 
 # Define the home page
-@app.route('/')
+@app.get('/')
 def hello():
     return 'Hello, World!'
 
@@ -43,22 +42,25 @@ def preprocess(features):
     return features
 
 
+@app.post('/predict')
+async def predict(request: Request):
+    try:
+        # Get the input data from the request
+        data = await request.json()
+        features = data['features']
+        features = preprocess(features)
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    # Get the input data from the request
-    data = request.get_json()
-    features = data['features']
-    features = preprocess(features)
+        # Predict using the loaded model
+        prediction = model.predict(features)
+
+        # Return the prediction as a JSON response
+        return {'prediction': prediction.tolist()}
     
-    # Predict using the loaded model
-    prediction = model.predict(features)
-
-    # Return the prediction as a JSON response
-    return jsonify({'prediction': prediction.tolist()})
-
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == '__main__':
+    import uvicorn
     # Use the PORT environment variable if available, otherwise default to 8502
     uvicorn.run(app, host="0.0.0.0", port=5000)
