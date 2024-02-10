@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM continuumio/miniconda3
 
 COPY . /app
 
