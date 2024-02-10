@@ -15,7 +15,7 @@ RUN pip install -r /app/requirements.txt
 
 
 # Copy the entire project directory
-COPY . /app
+COPY . .
 
 # Command to run the API with gunicorn
 CMD ["gunicorn", "api:app", "--bind", "0.0.0.0:5000", "--worker-class", "uvicorn.workers.UvicornWorker"]
