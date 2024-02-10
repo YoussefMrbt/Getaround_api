@@ -1,0 +1,14 @@
+docker build . -t vehicle-price-prediction-api
+
+docker run -p 8502:8502 -e PORT_API=8502 -e BACKEND_STORE_URI=sqlite:///mlflow.db vehicle-price-prediction-api
+
+docker run -p 8502:5000 vehicle-price-prediction-api
+
+Open new command window
+docker exec -it [dockername] //bin/bash
+
+python train.py
+
+curl -X POST -H "Content-Type: application/json" -d "{\"features\": [\"BMW\", 344599, 89, \"diesel\", \"beige\", \"estate\", 0, 0, 1, 1, 0, 0, 0]}" http://localhost:8502/predict
+
+curl -X POST -H "Content-Type: application/json" -d "{\"features\": [\"BMW\", 344599, 89, \"diesel\", \"beige\", \"estate\", 0, 0, 1, 1, 0, 0, 0]}" https://infinite-brook-57712-f41900b8e8dc.herokuapp.com/predict

@@ -1,0 +1,13 @@
+python-multipart
+pydantic 
+pandas 
+numpy
+streamlit
+streamlit_option_menu
+seaborn
+matplotlib
+openpyxl
+uvicorn
+fastapi
+Scikit-learn
+mlflow
